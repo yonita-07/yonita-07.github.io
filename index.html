@@ -65,9 +65,9 @@
     <section class="bg-gray-50 py-20 md:py-32">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center fade-in">
-                <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                    Data Science & Analytics Portfolio
-                </h2>
+               <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                 <span id="typed-name"></span>
+                   </h2>
                 <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
                     Transforming data into actionable insights through machine learning, 
                     analytics, and interactive visualizations
@@ -95,14 +95,10 @@
                 
                 <div class="bg-gray-50 p-8 rounded-xl border border-gray-200">
                     <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        I'm a data science enthusiast with a passion for solving real-world problems through data analysis, 
-                        machine learning, and interactive visualizations. My work focuses on extracting meaningful insights 
-                        from complex datasets and presenting them in ways that drive informed decision-making.
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        With expertise spanning predictive modeling, exploratory data analysis, and business intelligence 
-                        dashboards, I bridge the gap between technical analytics and business value. I'm particularly 
-                        interested in sustainability analytics, urban mobility, and energy optimization.
+                        I am Yonita Zibiah Yogeswaran, a Master's student in Applied Data Science at Georg- August Universität Göttingen
+                        with a strong foundation in Python, SQL and machine learning (scikit-learn, TensorFlow). I enjoy designing robust,
+                        end-to-end data solutions that connect high-quality data, well-structured models, and clear business questions.
+                        My current interests lie in applying advanced analytics to finance, business  performance, sustainability, and smart-city use cases.
                     </p>
                 </div>
 
@@ -436,7 +432,6 @@
             </div>
         </div>
     </footer>
-
     <script>
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -474,5 +469,40 @@
             observer.observe(el);
         });
     </script>
+    <script>
+    // Typing effect for name
+    const nameText = "Yonita Zibiah Yogeswaran";
+    const nameElement = document.getElementById('typed-name');
+    let charIndex = 0;
+
+    function typeWriter() {
+        if (charIndex < nameText.length) {
+            nameElement.textContent += nameText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 100); // Speed: 100ms per character
+        } else {
+            // Add blinking cursor after typing is done
+            nameElement.classList.add('typed-cursor');
+        }
+    }
+
+    // Start typing when page loads
+    window.addEventListener('load', typeWriter);
+</script>
+
+<style>
+    /* Blinking cursor effect */
+    .typed-cursor::after {
+        content: '|';
+        animation: blink 0.7s infinite;
+        margin-left: 5px;
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+</style>
 </body>
 </html>
+
