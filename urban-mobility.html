@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Mobility Delay Analysis | Data Science Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                        accent: '#60a5fa',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tech-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            transform: scale(1.05);
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: #3b82f6;
+            width: 80px;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h1 class="text-2xl font-bold text-gray-900">Urban Mobility Delay Analysis</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="portfolio.html" class="text-gray-700 hover:text-primary transition font-medium">Back to Portfolio</a>
+                    <a href="#overview" class="text-gray-700 hover:text-primary transition font-medium">Overview</a>
+                    <a href="#insights" class="text-gray-700 hover:text-primary transition font-medium">Insights</a>
+                    <a href="#model" class="text-gray-700 hover:text-primary transition font-medium">Model</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold mb-6 fade-in">Urban Mobility Delay Analysis</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                End-to-end machine learning project predicting train delays across 20 German cities using 77K records
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'})" 
+                        class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    Explore Project
+                </button>
+                <button onclick="window.open('https://github.com/yonita-07/urban-mobility-analysis', '_blank')" 
+                        class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition">
+                    View on GitHub
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section id="overview" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Project Overview</h3>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    A complete end-to-end data science project analyzing train delays across Germany's 20 largest city stations.
+                    Built a binary classification model achieving 84.89% accuracy to predict delay likelihood.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="card-hover bg-white p-6 rounded-xl border-2 border-gray-200">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">77K Train Records</h4>
+                    <p class="text-gray-600">Comprehensive dataset covering July-September 2024 across 20 major German stations</p>
+                </div>
+                <div class="card-hover bg-white p-6 rounded-xl border-2 border-gray-200">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">84.89% Accuracy</h4>
+                    <p class="text-gray-600">Logistic Regression model with hyperparameter tuning achieves strong predictive performance</p>
+                </div>
+                <div class="card-hover bg-white p-6 rounded-xl border-2 border-gray-200">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Actionable Insights</h4>
+                    <p class="text-gray-600">Clear hourly and station-based delay patterns identified for operational improvements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Description -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Dataset Overview</h3>
+                <div class="section-divider mx-auto"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-xl border border-gray-200 mb-8">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Time Period</h4>
+                            <p class="text-gray-600">July – September 2024</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Coverage</h4>
+                            <p class="text-gray-600">20 Largest City Main Stations (Hbf) in Germany</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Total Records</h4>
+                            <p class="text-gray-600">~77,000 train observations</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Delay Rate</h4>
+                            <p class="text-gray-600">~22% of trains experienced delays</p>
+                        </div>
+                    </div>
+
+                    <h4 class="text-xl font-bold text-gray-900 mb-4 mt-8">Key Features:</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">date</p>
+                                <p class="text-sm text-gray-600">Timestamp of scheduled departure</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">Hbf (station)</p>
+                                <p class="text-sm text-gray-600">Departure station identifier</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">train_model</p>
+                                <p class="text-sm text-gray-600">Type of train service</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">route</p>
+                                <p class="text-sm text-gray-600">Train route information</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">scheduled_time / expected_time</p>
+                                <p class="text-sm text-gray-600">Timing information</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-900">has_delay (target)</p>
+                                <p class="text-sm text-gray-600">1 = delayed, 0 = on time</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section id="insights" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Key Insights from Analysis</h3>
+                <div class="section-divider mx-auto"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl border-l-4 border-blue-500 card-hover">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">Delay Distribution</h4>
+                    <p class="text-gray-700 mb-4">
+                        Approximately <span class="font-bold text-primary">22% of all trains</span> experienced delays during the observation period.
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        This baseline provides context for model performance and operational planning.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border-l-4 border-purple-500 card-hover">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">Rush Hour Patterns</h4>
+                    <p class="text-gray-700 mb-4">
+                        Delay rates <span class="font-bold text-purple-600">peak during morning and evening rush hours</span>, correlating with increased operational load.
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        Time-of-day is a strong predictor of delay likelihood.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border-l-4 border-green-500 card-hover">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">Station Variations</h4>
+                    <p class="text-gray-700 mb-4">
+                        Some stations consistently show <span class="font-bold text-green-600">higher delay frequencies</span>, indicating infrastructure or operational bottlenecks.
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        Station-level analysis reveals priority areas for intervention.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border-l-4 border-orange-500 card-hover">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">Daily Trends</h4>
+                    <p class="text-gray-700 mb-4">
+                        Delay rates <span class="font-bold text-orange-600">fluctuate based on weekday patterns</span> and operational load variations.
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        Day-of-week features could improve model performance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto mt-12 bg-blue-50 border-l-4 border-primary p-6 rounded-lg">
+                <h4 class="text-xl font-bold text-gray-900 mb-3">Operational Insight</h4>
+                <p class="text-gray-700 leading-relaxed">
+                    Station location, route complexity, and train model all significantly influence delay probability. 
+                    These factors can be used to prioritize infrastructure investments and operational interventions 
+                    for maximum impact on system reliability.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Machine Learning Model -->
+    <section id="model" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Machine Learning Model</h3>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Logistic Regression with hyperparameter tuning via RandomizedSearchCV
+                </p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <!-- Model Performance Table -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
+                        <h4 class="text-2xl font-bold">Final Model Performance</h4>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-200">
+                                <p class="text-4xl font-bold text-primary mb-2">84.89%</p>
+                                <p class="text-gray-700 font-semibold">Accuracy</p>
+                            </div>
+                            <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-200">
+                                <p class="text-4xl font-bold text-primary mb-2">83.82%</p>
+                                <p class="text-gray-700 font-semibold">Precision</p>
+                            </div>
+                            <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-200">
+                                <p class="text-4xl font-bold text-primary mb-2">81.75%</p>
+                                <p class="text-gray-700 font-semibold">Recall</p>
+                            </div>
+                            <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-200">
+                                <p class="text-4xl font-bold text-primary mb-2">82.77%</p>
+                                <p class="text-gray-700 font-semibold">F1 Score</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-6 bg-green-50 rounded-lg border border-green-200">
+                            <h5 class="font-bold text-gray-900 mb-3">Model Strengths:</h5>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Strong performance despite natural class imbalance (22% delays)
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Highly interpretable coefficients for stakeholder communication
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Balanced precision and recall for practical deployment
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Optimized via hyperparameter tuning for best generalization
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodology -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Model Development</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="font-semibold mr-2">1.</span>
+                                Data cleaning and preprocessing
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-semibold mr-2">2.</span>
+                                Feature engineering (station, route, time features)
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-semibold mr-2">3.</span>
+                                Train/test split for evaluation
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-semibold mr-2">4.</span>
+                                RandomizedSearchCV for hyperparameter tuning
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-semibold mr-2">5.</span>
+                                Model evaluation with multiple metrics
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Visualizations Included</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Delay distribution histogram
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Delay by station comparison
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Hourly delay patterns
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Time trend analysis
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Technical Skills Demonstrated</h3>
+                <div class="section-divider mx-auto"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Languages & Libraries</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">Python 3.10</span>
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">Pandas</span>
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">NumPy</span>
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">Matplotlib</span>
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">Seaborn</span>
+                        <span class="tech-badge px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold border border-gray-200">Scikit-learn</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Machine Learning</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Logistic Regression</li>
+                        <li>• Train/test split methodology</li>
+                        <li>• Class imbalance handling</li>
+                        <li>• Hyperparameter tuning (RandomizedSearchCV)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Data Analysis</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Data cleaning & preprocessing</li>
+                        <li>• Feature engineering</li>
+                        <li>• Time-based analysis</li>
+                        <li>• EDA & visualization</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Tools & Workflow</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Jupyter Notebook</li>
+                        <li>• Git / GitHub</li>
+                        <li>• Project documentation</li>
+                        <li>• Reproducible research</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white p-10 rounded-xl border-2 border-gray-200">
+                <h3 class="text-3xl font-bold text-gray-900 mb-6 text-center">Conclusion & Future Work</h3>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Key Findings:</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Train delays show clear <strong>hourly and station-based patterns</strong>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            A simple Logistic Regression model predicts delays with <strong>~85% accuracy</strong>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-primary mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Operational factors (station, load, train type) play a major role and can guide interventions
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <p class="font-semibold text-gray-900 mb-3">Future Extensions:</p>
+                    <ul class="grid md:grid-cols-2 gap-3 text-gray-700">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                            External factors (weather, events, maintenance)
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                            Gradient boosting models (XGBoost, LightGBM)
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                            Interactive Streamlit dashboard
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                            Geospatial visualization for route-level analysis
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">About This Project</h4>
+                    <p class="text-gray-400">End-to-end machine learning project demonstrating data science skills in urban mobility analysis.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="portfolio.html" class="hover:text-white transition">Back to Portfolio</a></li>
+                        <li><a href="#overview" class="hover:text-white transition">Overview</a></li>
+                        <li><a href="#insights" class="hover:text-white transition">Insights</a></li>
+                        <li><a href="#model" class="hover:text-white transition">Model</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/yonita-07/urban-mobility-analysis" target="_blank" class="hover:text-primary transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yonita-zibiah-y-261765221" target="_blank" class="hover:text-blue-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-gray-800">
+                <p class="text-gray-400">&copy; 2025 Urban Mobility Analysis. Data science for smarter cities.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade-in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
